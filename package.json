@@ -10,5 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "irian",
-  "license": "MIT"
+  "license": "MIT",
+  "imports": {
+    "#utils/*.js": "./src/utils/*.js"
+  }
 }
