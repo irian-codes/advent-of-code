@@ -94,7 +94,7 @@ function part2() {
         } else {
           failures++;
 
-          if (isComparisonValid(val, report[i + 2])) {
+          if (isComparisonValid(val, report[i + 2], previousDiffSign)) {
             report.splice(i + 1, 1);
           } else {
             report.splice(i, 1);
