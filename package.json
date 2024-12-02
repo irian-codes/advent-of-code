@@ -1,0 +1,14 @@
+{
+  "name": "js-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-old-space-size=4000 index.js",
+    "debug": "node --inspect --max-old-space-size=4000 index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "irian",
+  "license": "MIT"
+}
