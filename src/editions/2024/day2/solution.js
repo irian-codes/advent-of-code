@@ -4,7 +4,7 @@ const problemInput = readProblemInputAsString(import.meta.dirname);
 
 function inputToMatrix(inputStr) {
   const split = inputStr.split(/\n/);
-  console.log(split);
+  // console.log(split);
 
   const matrix = [];
 
@@ -16,12 +16,7 @@ function inputToMatrix(inputStr) {
 }
 
 function part1() {
-  const input = inputToMatrix(`7 6 4 2 1
-1 2 7 8 9
-9 7 6 2 1 0
-1 3 2 4 5 12
-8 6 4 4 1
-1 3 6 7 9`);
+  const input = inputToMatrix(problemInput);
 
   const MIN_DIFF = 1;
   const MAX_DIFF = 3;
@@ -29,28 +24,23 @@ function part1() {
   let solution = 0;
 
   input.forEach((report) => {
-    let initialDirection; // 'inc' | 'dec'
+    let previousDiffSign;
 
     for (let i = 0; i < report.length - 1; i++) {
       const val = report[i];
       const nextVal = report[i + 1];
+      const diff = val - nextVal;
+      const diffSign = diff < 0 ? -1 : 1;
 
-      const dir = val > nextVal ? 'dec' : 'inc';
-
-      if (initialDirection == null) {
-        initialDirection = dir;
-      } else {
-        if (initialDirection !== dir) {
-          return;
-        }
-      }
-
-      if (
-        Math.abs(val - nextVal) < MIN_DIFF ||
-        Math.abs(val - nextVal) > MAX_DIFF
-      ) {
+      if (Math.abs(diff) < MIN_DIFF || Math.abs(diff) > MAX_DIFF) {
         return;
       }
+
+      if (previousDiffSign != null && diffSign !== previousDiffSign) {
+        return;
+      }
+
+      previousDiffSign = diffSign;
     }
 
     solution++;
