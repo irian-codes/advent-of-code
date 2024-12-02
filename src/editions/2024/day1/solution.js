@@ -1,9 +1,9 @@
-import {readProblemInput} from '#utils/fileUtils.js';
+import {readProblemInputAsString} from '#utils/fileUtils.js';
 
-const input = readProblemInput(import.meta.dirname);
+const problemInput = readProblemInputAsString(import.meta.dirname);
 
-function part1() {
-  const split = input.split(/\s+/);
+function inputToArrays(inputStr) {
+  const split = inputStr.split(/\s+/);
   // console.log(split);
 
   const list1 = [];
@@ -19,6 +19,15 @@ function part1() {
 
     count++;
   }
+
+  return {
+    list1,
+    list2,
+  };
+}
+
+function part1() {
+  const {list1, list2} = inputToArrays(problemInput);
 
   list1.sort();
   list2.sort();

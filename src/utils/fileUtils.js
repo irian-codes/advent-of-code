@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function readProblemInput(fileFolderPath, inputFileName = 'input.txt') {
+export function readProblemInputAsString(
+  fileFolderPath,
+  inputFileName = 'input.txt'
+) {
   return readFileSyncToString(path.join(fileFolderPath, inputFileName));
 }
 
