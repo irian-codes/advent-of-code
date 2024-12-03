@@ -63,32 +63,19 @@ function part2() {
   1 3 6 7 9 -> Safe
   */
   // const input = inputToMatrix(
-  //   `7 6 4 2 1
-  // 1 2 7 8 9
-  // 1 2 7 3 4
-  // 9 7 6 2 1
-  // 1 3 2 4 5
-  // 1 3 2 3 5
-  // 8 6 4 4 1
-  // 1 3 6 7 9`
+  //   readProblemInputAsString(
+  //     import.meta.dirname,
+  //     'test-inputs/my-test-input.txt'
+  //   )
   // );
 
   // Reddit suggested test cases
-  //   const input = inputToMatrix(
-  //     `48 46 47 49 51 54 56
-  // 1 1 2 3 4 5
-  // 1 2 3 4 5 5
-  // 5 1 2 3 4 5
-  // 1 4 3 2 1
-  // 1 6 7 8 9
-  // 1 2 3 4 3
-  // 9 8 7 6 7
-  // 7 10 8 10 11
-  // 29 28 27 25 26 25 22 20
-  // 7 10 8 10 11
-  // 29 28 27 25 26 25 22 20
-  // 8 9 10 11`
-  //   );
+  // const input = inputToMatrix(
+  //   readProblemInputAsString(
+  //     import.meta.dirname,
+  //     'test-inputs/reddit-test-input.txt'
+  //   )
+  // );
 
   const input = inputToMatrix(problemInput);
 
