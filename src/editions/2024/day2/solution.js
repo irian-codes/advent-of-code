@@ -90,10 +90,12 @@ function part2() {
     const result1 = isReportValid(report);
 
     if (!result1.isValid) {
+      // Removing both possible bad levels
       const result2 = isReportValid(report.toSpliced(result1.failureIndex, 1));
       const result3 = isReportValid(
         report.toSpliced(result1.failureIndex + 1, 1)
       );
+      // Edge case where the report gets valid if we remove the first element
       const result4 = isReportValid(report.toSpliced(0, 1));
 
       if (!result2.isValid && !result3.isValid && !result4.isValid) {
