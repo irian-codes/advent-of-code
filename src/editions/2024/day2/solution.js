@@ -50,6 +50,7 @@ function part1() {
 }
 
 function part2() {
+  // My test cases
   // 6 reports are correct if we eliminate one number
   /*
   7 6 4 2 1 -> Safe
@@ -61,52 +62,58 @@ function part2() {
   8 6 4 4 1 -> Safe (by removing first or second bad number to fix)
   1 3 6 7 9 -> Safe
   */
-  const input = inputToMatrix(
-    `7 6 4 2 1
-  1 2 7 8 9
-  1 2 7 3 4
-  9 7 6 2 1
-  1 3 2 4 5
-  1 3 2 3 5
-  8 6 4 4 1
-  1 3 6 7 9`
-  );
+  // const input = inputToMatrix(
+  //   `7 6 4 2 1
+  // 1 2 7 8 9
+  // 1 2 7 3 4
+  // 9 7 6 2 1
+  // 1 3 2 4 5
+  // 1 3 2 3 5
+  // 8 6 4 4 1
+  // 1 3 6 7 9`
+  // );
 
-  // const input = inputToMatrix(problemInput);
+  // Reddit suggested test cases
+  //   const input = inputToMatrix(
+  //     `48 46 47 49 51 54 56
+  // 1 1 2 3 4 5
+  // 1 2 3 4 5 5
+  // 5 1 2 3 4 5
+  // 1 4 3 2 1
+  // 1 6 7 8 9
+  // 1 2 3 4 3
+  // 9 8 7 6 7
+  // 7 10 8 10 11
+  // 29 28 27 25 26 25 22 20
+  // 7 10 8 10 11
+  // 29 28 27 25 26 25 22 20
+  // 8 9 10 11`
+  //   );
+
+  const input = inputToMatrix(problemInput);
+
+  // console.log(input);
 
   const MIN_DIFF = 1;
   const MAX_DIFF = 3;
-  const MAX_FAILURES = 1;
 
   let solution = 0;
 
   input.forEach((report) => {
-    let previousDiffSign;
-    let failures = 0;
+    const result1 = isReportValid(report);
 
-    for (let i = 0; i < report.length - 1; i++) {
-      const val = report[i];
-      const nextVal = report[i + 1];
+    if (!result1.isValid) {
+      const result2 = isReportValid(report.toSpliced(result1.failureIndex, 1));
+      const result3 = isReportValid(
+        report.toSpliced(result1.failureIndex + 1, 1)
+      );
+      const result4 = isReportValid(report.toSpliced(0, 1));
 
-      if (!isComparisonValid(val, nextVal, previousDiffSign)) {
-        if (failures === MAX_FAILURES) {
-          return;
-        } else {
-          failures++;
+      if (!result2.isValid && !result3.isValid && !result4.isValid) {
+        // console.log('invalid: ', {report, result1, result2, result3});
 
-          if (isComparisonValid(val, report[i + 2], previousDiffSign)) {
-            report.splice(i + 1, 1);
-          } else {
-            report.splice(i, 1);
-          }
-
-          previousDiffSign = undefined;
-          i = -1;
-          continue;
-        }
+        return;
       }
-
-      previousDiffSign = val - nextVal < 0 ? -1 : 1;
     }
 
     solution++;
@@ -115,6 +122,28 @@ function part2() {
   return solution;
 
   // HELPER FUNCTIONS
+
+  function isReportValid(report) {
+    let previousDiffSign;
+
+    for (let i = 0; i < report.length - 1; i++) {
+      const val = report[i];
+      const nextVal = report[i + 1];
+
+      if (!isComparisonValid(val, nextVal, previousDiffSign)) {
+        return {
+          isValid: false,
+          failureIndex: i,
+        };
+      }
+
+      previousDiffSign = val - nextVal < 0 ? -1 : 1;
+    }
+
+    return {
+      isValid: true,
+    };
+  }
 
   function isComparisonValid(val, nextVal, previousDiffSign) {
     if (val == null || nextVal == null) {
