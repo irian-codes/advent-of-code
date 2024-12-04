@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # custom
-src/**/day*/input.txt
+src/**/day*/**/input.txt
