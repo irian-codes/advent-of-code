@@ -19,13 +19,7 @@ function inputToMatrix(inputStr) {
 }
 
 function part1() {
-  const input = inputToMatrix(problemTestInput);
-
-  // console.log(input);
-
-  // POTENTIAL APPROACHES:
-  // - 1: Finding the words directly doing BFS or DFS
-  // - 2: Removing non related characters and then search
+  const input = inputToMatrix(problemInput);
 
   // STEPS:
   // 1 - For each letter:
@@ -68,16 +62,8 @@ function part1() {
       ) {
         input[rowI][colI] = 0;
       }
-
-      console.log('heeey 🚀 ~ file: solution.js:23 ~ part1 ~ input: ', input);
     });
   });
-
-  // console.log(
-  // 'heeey 🚀 ~ file: solution.js:74 ~ row.forEach ~ validPositionsMap: ',
-  // validPositionsMap
-  // );
-
   return foundWordsCount;
 
   // HELPER FUNCTIONS
@@ -85,20 +71,11 @@ function part1() {
   function findWordsAmount(startPos) {
     const _validPositions = tryFindWord(startPos);
 
-    if (_validPositions.join(',').includes('6,5')) {
-      // console.log('heeey 🚀 ~ file: solution.js:87 _validPositions: ', {
-      // _validPositions,
-      // vals: _validPositions.map((p) => input[p[0]][p[1]]),
-      // });
-    }
-
     // Marking valid (1) positions as they form words
     _validPositions.forEach((pos) => validPositionsMap.add(pos.join(',')));
 
     return Math.floor(_validPositions.length / targetWord.length);
   }
-
-  // TODO: Position 6,5 is counted as valid but it isn't
 
   function tryFindWord(
     pos,
@@ -141,11 +118,11 @@ function part1() {
         );
 
         validPositions.push(...positions);
-      });
 
-      if (validPositions.length > 0) {
-        validPositions.push(pos);
-      }
+        if (positions.length > 0) {
+          validPositions.push(pos);
+        }
+      });
 
       return validPositions;
     }
